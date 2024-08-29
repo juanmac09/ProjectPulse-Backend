@@ -31,6 +31,9 @@ public class Company {
     @OneToMany(mappedBy = "companyId")
     private List<User> users;
 
+    @OneToMany(mappedBy = "companyId")
+    private List<Project> projects;
+
     public Company() {}
     public Company(String name, String nit, String phone, String address, String email) {
         this.setName(name);
@@ -80,6 +83,20 @@ public class Company {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<User> getUsers() {
+        return this.users;
+    }
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Project> getProjects() {
+        return this.projects;
+    }
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
 
