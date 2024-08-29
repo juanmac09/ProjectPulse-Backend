@@ -28,10 +28,6 @@ public class AuthenticationController {
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
 
-        System.out.println(registerUserDto.getName());
-        System.out.println(registerUserDto.getEmail());
-        System.out.println(registerUserDto.getPassword());
-        System.out.println(registerUserDto.getCompany().getId());
         return ResponseEntity.ok(registeredUser);
     }
 
