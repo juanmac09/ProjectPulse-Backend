@@ -1,6 +1,7 @@
 package com.example.projectpulse.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Table(name = "projects")
 @Entity
@@ -24,6 +25,10 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company companyId;
+
+    // One-to-many relationship with the UserStory entity.
+    @OneToMany(mappedBy = "project")
+    private List<UserStory> userStories;
 
     // Default constructor.
     public Project() {}
@@ -68,5 +73,15 @@ public class Project {
     // Setter for the associated company.
     public void setCompanyId(Company companyId) {
         this.companyId = companyId;
+    }
+
+    // Getter for the list of user stories associated with the project.
+    public List<UserStory> getUserStories() {
+        return this.userStories;
+    }
+
+    // Setter for the list of user stories associated with the project.
+    public void setUserStories(List<UserStory> userStories) {
+        this.userStories = userStories;
     }
 }
