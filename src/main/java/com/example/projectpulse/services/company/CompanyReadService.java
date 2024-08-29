@@ -15,11 +15,19 @@ public class CompanyReadService implements ICompanyReadService {
 
     private final CompanyRepository companyRepository;
     private final GeneralCompanyMapper generalCompanyMapper;
-    public CompanyReadService(CompanyRepository companyRepository , GeneralCompanyMapper generalCompanyMapper) {
+
+    // Constructor for dependency injection.
+    public CompanyReadService(CompanyRepository companyRepository, GeneralCompanyMapper generalCompanyMapper) {
         this.companyRepository = companyRepository;
         this.generalCompanyMapper = generalCompanyMapper;
     }
 
+    /**
+     * Retrieves a paginated list of companies and maps them to GeneralCompanyDto.
+     *
+     * @param pageable The Pageable object containing pagination information.
+     * @return A Page of GeneralCompanyDto objects.
+     */
     @Transactional
     @Override
     public Page<GeneralCompanyDto> getAllCompanies(Pageable pageable) {
