@@ -1,6 +1,7 @@
 package com.example.projectpulse.services.project;
 
 import com.example.projectpulse.dtos.project.read.ProjectGeneralDto;
+import com.example.projectpulse.entities.Company;
 import com.example.projectpulse.entities.Project;
 import com.example.projectpulse.mapping.project.GeneralProjectMapper;
 import com.example.projectpulse.repositories.project.ProjectRepository;
@@ -22,11 +23,12 @@ public class ProjectReadService implements IProjectReadService {
      * Retrieves a project by its ID.
      *
      * @param id The ID of the project to retrieve.
+     * @param companyId The ID of the company.
      * @return A ProjectGeneralDto object containing the project data, or null if the project is not found.
      */
     @Override
-    public ProjectGeneralDto getProject(long id) {
-        Project project = this.projectRepository.findById(id).orElse(null);
+    public ProjectGeneralDto getProject(long id, Company companyId) {
+        Project project = this.projectRepository.findByIdAndCompanyId(id,companyId);
         if (project == null) {
             return null;
         }

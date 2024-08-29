@@ -79,7 +79,7 @@ public class ProjectsController {
     public ResponseEntity<AnswerRequests<ProjectGeneralDto>> getProject(@PathVariable Long id) {
         AnswerRequests<ProjectGeneralDto> answerRequests = new AnswerRequests<>();
         answerRequests.setSuccess(true);
-        answerRequests.setData(this.projectReadService.getProject(id));
+        answerRequests.setData(this.projectReadService.getProject(id,this.authenticatedUser.getUser().getCompanyId()));
 
         return new ResponseEntity<>(answerRequests, HttpStatus.OK);
     }
