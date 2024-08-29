@@ -13,7 +13,7 @@ public class User implements UserDetails {
 
     // Primary key for the entity, automatically generated.
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "id")
     private Long id;
 

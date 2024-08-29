@@ -10,7 +10,7 @@ public class Company {
 
     // Primary key for the entity, automatically generated.
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
