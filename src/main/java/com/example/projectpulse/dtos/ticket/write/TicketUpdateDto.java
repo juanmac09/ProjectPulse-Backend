@@ -1,25 +1,21 @@
-package com.example.projectpulse.dtos.ticket.read;
+package com.example.projectpulse.dtos.ticket.write;
 
-import com.example.projectpulse.dtos.userstory.read.UserStoryGeneralDto;
+import com.example.projectpulse.entities.UserStory;
 import com.example.projectpulse.enums.ticket.Status;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-public class TicketGeneralDto {
-    private Long id;
+public class TicketUpdateDto {
+
+    @Size(min = 3, message = "The name field does not meet the character length")
     private String title;
+    @Size(min = 2, message = "The field description is not of adequate length")
     private String description;
     private Status status;
+    @Size(min = 2, message = "The field comment is not of adequate length")
     private String comment;
-    private UserStoryGeneralDto userStory;
 
     // Setters and getters here...
-
-    public Long getId() {
-        return this.id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return this.title;
     }
@@ -46,13 +42,6 @@ public class TicketGeneralDto {
     }
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public UserStoryGeneralDto getUserStory() {
-        return this.userStory;
-    }
-    public void setUserStory(UserStoryGeneralDto userStory) {
-        this.userStory = userStory;
     }
 
 }
