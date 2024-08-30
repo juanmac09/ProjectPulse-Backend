@@ -9,5 +9,12 @@ public enum Status {
     Progress,
 
     // Ticket is completed and no further action is needed.
-    Completed
+    Completed;
+
+    public static Status fromIndex(int index) {
+        if (index < 0 || index >= values().length) {
+            throw new IllegalArgumentException("Invalid index: " + index);
+        }
+        return values()[index];
+    }
 }
