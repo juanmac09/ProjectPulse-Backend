@@ -14,6 +14,10 @@ public class Ticket {
     private Long id;
 
     // Field for the ticket's description, cannot be null.
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    // Field for the ticket's description, cannot be null.
     @Column(name = "description", nullable = false)
     private String description;
 
@@ -44,6 +48,15 @@ public class Ticket {
     // Getter for the ticket's ID.
     public Long getId() {
         return this.id;
+    }
+
+    // Getter for the ticket's title.
+    public String getTitle() {
+        return this.title;
+    }
+    // Setter for the ticket's title.
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     // Getter for the ticket's description.
