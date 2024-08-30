@@ -23,6 +23,7 @@ public class Ticket {
 
     // Field for the ticket's status, cannot be null. Uses an enumerated type.
     @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     // Field for additional comments on the ticket, cannot be null.
