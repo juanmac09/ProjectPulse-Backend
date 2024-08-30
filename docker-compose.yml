@@ -1,5 +1,5 @@
 services:
-  notification.email:
+  project.pulse:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,7 +9,16 @@ services:
       - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-      - JWT_SECRET-KEY=${JWT_SECRET-KEY}
-      - JWT_EXPIRATION-TIME=${JWT_EXPIRATION-TIME}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_EXPIRATION_TIME=${JWT_EXPIRATION_TIME}
+    depends_on:
+      - db
     volumes:
       - ./target/ProjectPulse-0.0.1-SNAPSHOT.jar:/app.jar
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - 3306:3306
