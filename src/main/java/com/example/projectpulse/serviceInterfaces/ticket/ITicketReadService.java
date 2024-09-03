@@ -14,4 +14,5 @@ public interface ITicketReadService {
     Page<TicketSpecificDto> getTicketsByCompanyId(Company company, Pageable pageable);
     Page<TicketSpecificDto> getTicketsByProjectId(Long projectId,Company company, Pageable pageable);
     Page<TicketSpecificDto> getTicketsByProjectIdAndStatus(Long projectId, Status status, Company company, Pageable pageable);
+    Page<TicketSpecificDto> getTicketsByUserStory(Long userStoryId, Company company, Pageable pageable);
 }

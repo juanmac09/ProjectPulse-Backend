@@ -98,5 +98,21 @@ public class TicketReadService implements ITicketReadService {
         return tickets.map(this.specificTicketMapper::map);
     }
 
-
+    /**
+     * Retrieves a paginated list of `TicketSpecificDto` objects for a specific user story within a company.
+     *
+     * This method first queries the `TicketReadRepository` to find `Ticket` entities based on the provided
+     * `userStoryId` and `company` parameters, using pagination. Then, it maps the resulting `Ticket` entities
+     * to `TicketSpecificDto` objects using the `specificTicketMapper`.
+     *
+     * @param userStoryId the ID of the user story for which tickets are to be retrieved.
+     * @param company the company to which the tickets should belong.
+     * @param pageable the pagination information.
+     * @return a paginated list of `TicketSpecificDto` objects.
+     */
+    @Override
+    public Page<TicketSpecificDto> getTicketsByUserStory(Long userStoryId, Company company, Pageable pageable) {
+        Page<Ticket> tickets = this.ticketReadRepository.findByUserStoryIdAndCompanyId(userStoryId, company.getId(), pageable);
+        return tickets.map(this.specificTicketMapper::map);
+    }
 }

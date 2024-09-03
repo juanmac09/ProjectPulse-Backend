@@ -91,4 +91,26 @@ public interface TicketReadRepository extends JpaRepository<Ticket, Long> {
                                                          @Param("companyId") Long companyId,
                                                          @Param("status") Status status,
                                                          Pageable pageable);
+
+
+    /**
+     * Retrieves a paginated list of `Ticket` entities based on the given `userStoryId` and `companyId`
+     * The query joins the `Ticket` entity with the `UserStory`, `Project`, and `Company` entities to filter
+     * the results by the specified `userStoryId` and `companyId`.
+     *
+     * @param userStoryId the ID of the user story to filter tickets by.
+     * @param companyId the ID of the company to filter tickets by.
+     * @param pageable the pagination information.
+     * @return a `Page` containing the filtered tickets.
+     */
+    @Query("SELECT t FROM Ticket t " +
+            "JOIN UserStory us ON t.userStoryId.id = us.id " +
+            "JOIN Project p ON us.project.id = p.id " +
+            "JOIN Company c ON p.companyId.id = c.id " +
+            "WHERE us.id = :userStoryId AND c.id = :companyId")
+    Page<Ticket> findByUserStoryIdAndCompanyId(@Param("userStoryId") Long userStoryId,
+                                               @Param("companyId") Long companyId,
+                                               Pageable pageable);
+
+
 }

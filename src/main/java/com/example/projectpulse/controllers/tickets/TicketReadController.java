@@ -165,8 +165,38 @@ public class TicketReadController {
     }
 
 
-
-
+    /**
+     * Handles a GET request to retrieve a paginated list of `TicketSpecificDto` objects for a specific user story.
+     * The method takes the `userStoryId` as a path variable and pagination parameters (`page` and `size`) as
+     * request parameters. It fetches the tickets associated with the given user story ID within the company of
+     * the currently authenticated user. The results are returned wrapped in an `AnswerRequests` object, which
+     * includes metadata about the success of the operation and the data itself.
+     *
+     * @param userStoryId the ID of the user story for which tickets are to be retrieved.
+     * @param page the page number for pagination.
+     * @param size the size of each page.
+     * @return a `ResponseEntity` containing an `AnswerRequests` object with the paginated list of `TicketSpecificDto`.
+     */
+    @Transactional
+    @GetMapping("/get/UserStory/{userStoryId}")
+    public ResponseEntity<AnswerRequests<Page<TicketSpecificDto>>> getTicketByUserStory(
+            @PathVariable("userStoryId") Long userStoryId,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size
+    ) {
+        AnswerRequests<Page<TicketSpecificDto>> answerRequests = new AnswerRequests<>();
+        answerRequests.setSuccess(true);
+        answerRequests.setMessage(null);
+        Pageable pageable = PageRequest.of(page, size);
+        answerRequests.setData(
+                this.ticketReadService.getTicketsByUserStory(
+                        userStoryId,
+                        this.authenticatedUser.getUser().getCompanyId(),
+                        pageable
+                )
+        );
+        return new ResponseEntity<>(answerRequests, HttpStatus.OK);
+    }
 
 
 }
