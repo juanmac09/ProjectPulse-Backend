@@ -8,4 +8,5 @@ import org.springframework.data.domain.Pageable;
 public interface IUserStoryReadService {
      UserStoryGeneralDto getUserStory(Long id, Company company);
      Page<UserStoryGeneralDto> getUserStories(Pageable pageable, Company company);
+     Page<UserStoryGeneralDto> getUserStoryByProjectId(Long projectId, Company company, Pageable pageable);
 }

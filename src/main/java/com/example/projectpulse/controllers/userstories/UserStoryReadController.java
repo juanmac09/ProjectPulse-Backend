@@ -66,6 +66,33 @@ public class UserStoryReadController {
         return new ResponseEntity<>(answerRequests, HttpStatus.OK);
     }
 
+    /**
+     * Handles a GET request to retrieve a paginated list of `UserStoryGeneralDto` objects for a specific project within the authenticated user's company.
+     *
+     * The method takes the `id` of the project as a path variable, along with pagination parameters (`page` and `size`) as request parameters.
+     * It fetches the user stories associated with the given project ID and the company of the currently authenticated user.
+     * The results are returned wrapped in an `AnswerRequests` object, which includes metadata about the success of the operation, a message, and the data itself.
+     *
+     * @param id the ID of the project for which user stories are to be retrieved.
+     * @param page the page number for pagination.
+     * @param size the size of each page.
+     * @return a `ResponseEntity` containing an `AnswerRequests` object with the paginated list of `UserStoryGeneralDto`.
+     */
+    @GetMapping("projectId/{id}")
+    @Transactional
+    public ResponseEntity<AnswerRequests<Page<UserStoryGeneralDto>>> getUserStoryByProjectId(@PathVariable Long id, @RequestParam int page, @RequestParam int size) {
+        AnswerRequests<Page<UserStoryGeneralDto>>answerRequests = new AnswerRequests<>();
+        answerRequests.setSuccess(true);
+        answerRequests.setMessage("User Story");
+        Pageable pageable = PageRequest.of(page, size);
+        answerRequests.setData(this.userStoryReadService.getUserStoryByProjectId(
+                id,
+                this.authenticatedUser.getUser().getCompanyId(),
+                pageable
+        ));
+        return new ResponseEntity<>(answerRequests, HttpStatus.OK);
+    }
+
 
 
 
